@@ -6,7 +6,10 @@ const jsonfile = require('jsonfile');
 
 const app = express();
 
-let data = {};
+let data = {
+  todoList: [],
+  error: ""
+};
 
 jsonfile.readFile('data.json',function(err,obj){
   // console.dir(obj);
@@ -30,18 +33,27 @@ app.get("/", function(req, res){
 app.get("/todo", function(req, res){
   // console.log("Data: ", data);
   res.render("index", data);
+  data.error = "";
 });
 
 app.post("/todo", function(req, res){
-  let newTask = {
-    complete: false,
-    task: req.body.todo,
-    id: data.todoList.length
-  };
-  data.todoList.push(newTask);
-  jsonfile.writeFile('data.json', data, function(err){
-    console.error(err);
-  });
+  req.checkBody("todo","!! Error: no todo item added !!").notEmpty();
+
+  if(req.validationErrors()){
+  data.error = req.validationErrors()[0].msg;
+  }
+
+  if(!data.error){
+    let newTask = {
+      complete: false,
+      task: req.body.todo,
+      id: data.todoList.length
+    };
+    data.todoList.push(newTask);
+    jsonfile.writeFile('data.json', data, function(err){
+      console.error(err);
+    });
+  }
   res.redirect("/todo")
 });
 

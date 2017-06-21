@@ -15,6 +15,12 @@
         <h2 id="vol1">Vol. 2.0</h2>
       </div>
 
+      <div class="errors">
+        {{#error}}
+        <h1>{{error}}</h1>
+        {{/error}}
+      </div>
+
       <div class="input-form">
         <form class="add-todo" action="/todo" method="post">
           <input type="text" name="todo" value="" placeholder="Add a todo...">
