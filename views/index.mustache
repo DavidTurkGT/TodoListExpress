@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ToDo List!</title>
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="heading">
+        <h1>Awesome Todo List Maker</h1>
+        <h2 id="vol1">Vol. 1</h2>
+      </div>
+
+      <div class="input-form">
+        <form class="add-todo" action="/todo" method="post">
+          <input type="text" name="todo" value="" placeholder="Add a todo...">
+          <button type="submit" name="todoSubmit">Add Todo</button>
+        </form>
+      </div>
+
+      <div class="incomplete-tasks">
+        <ul>
+          {{#todoList}}
+          {{^complete}}
+          <li>
+            <form class="mark-complete" action="/taskcomplete" method="post">
+              <button type="submit" name="taskComplete" id={{task}}>Mark complete</button>
+              <input type="text" name="taskid" value={{id}} hidden>
+              <label for="{{task}}">{{task}}</label>
+            </form>
+          </li>
+          {{/complete}}
+          {{/todoList}}
+        </ul>
+      </div>
+
+      <div class="complete-tasks">
+        <h3>Complete Tasks</h3>
+        <ul>
+          {{#todoList}}
+          {{#complete}}
+          <li>{{task}}</li>
+          {{/complete}}
+          {{/todoList}}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
