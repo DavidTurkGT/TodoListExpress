@@ -2,15 +2,16 @@ const express = require('express');
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const jsonfile = require('jsonfile');
 
 const app = express();
 
-let data = { todoList: [
-  { complete: true, task: "Get job", id: 0},
-  { complete: false, task: "Eat ice cream", id: 1},
-  { complete: true, task: "Eat lunch", id: 2}
-]
-};
+let data = {};
+
+jsonfile.readFile('data.json',function(err,obj){
+  // console.dir(obj);
+  data.todoList = obj.todoList;
+});
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,6 +28,7 @@ app.get("/", function(req, res){
 });
 
 app.get("/todo", function(req, res){
+  // console.log("Data: ", data);
   res.render("index", data);
 });
 
@@ -37,14 +39,18 @@ app.post("/todo", function(req, res){
     id: data.todoList.length
   };
   data.todoList.push(newTask);
-
+  jsonfile.writeFile('data.json', data, function(err){
+    console.error(err);
+  });
   res.redirect("/todo")
 });
 
 app.post("/taskcomplete", function(req, res){
   let taskID = req.body.taskid;
   data.todoList[taskID].complete = true;
-
+  jsonfile.writeFile('data.json', data, function(err){
+    console.error(err);
+  });
   res.redirect("/todo");
 });
 
