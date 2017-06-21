@@ -1,3 +1,99 @@
+*{
+  box-sizing: border-box;
+  color: #fff;
+  color: green;
+  font-family: 'VT323', monospace;
+}
+
 body{
-  background-color: red;
+  background-color: black;
+}
+
+.heading{
+  text-align: center;
+}
+
+.heading h1{
+  font-family: 'Audiowide', cursive;
+  font-size: 3.5em;
+  background: linear-gradient(#4788A1, #fff, #4788A1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heading h2{
+  font-family: 'Permanent Marker', cursive;
+    color: red;
+    position: relative;
+    top: -86px;
+    left: 155px;
+    transform: rotate(-10deg);
+    font-size: 2.5em;
+}
+
+.container{
+  width: 50vw;
+  margin: auto;
+}
+
+.input-form{
+  padding: 1rem;
+  margin-top: -6rem;
+}
+
+.add-todo{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.add-todo input{
+  flex: 1 70%;
+  padding: 5px;
+  font-size: 1.5em;
+  border: 2px dotted green;
+  background-color: transparent;
+}
+
+.add-todo input::placeholder{
+  color: green;
+}
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.incomplete-tasks label, .complete-tasks li{
+  font-size: 1.5em;
+}
+
+.incomplete-tasks{
+  padding: 1rem;
+}
+
+.incomplete-tasks button{
+  padding: 8px;
+  border: 2px dotted green;
+  font-size: 1.1em;
+  background-color: transparent;
+}
+
+.complete-tasks{
+  padding: 1rem;
+  line-height: 1.6;
+}
+
+h3 {
+  margin: 0;
+  font-size: 2em;
+  border-bottom: 3px dotted;
+}
+
+input:focus{
+  outline:none;
+}
+
+button:focus{
+  outline: none;
 }
